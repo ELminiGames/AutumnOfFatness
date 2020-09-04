@@ -8,10 +8,12 @@ public class Telephone : MonoBehaviour
     [SerializeField] private float RandomValue;
     [SerializeField] private GameObject telephoneObj;
 
+    [SerializeField] private float deltaTime;
     private bool isBell;
     // Start is called before the first frame update
     void Start()
     {
+        deltaTime = 0.0f;
         isBell = false;
         if (interval <= 0.0f)
         {
@@ -21,10 +23,29 @@ public class Telephone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (isBell)
-        //{
-        VibreateTelephone();
-        //}
+        deltaTime += Time.deltaTime;
+        if (deltaTime >= interval)
+        {
+            deltaTime = 0.0f;
+            if (isBell)
+            {
+                InitTelephone();
+                isBell = false;
+            }
+            else
+            {
+                isBell = true;
+            }
+        }
+        if (isBell)
+        {
+            VibreateTelephone();
+        }
+    }
+
+    private void InitTelephone()
+    {
+        telephoneObj.GetComponent<Transform>().localRotation = Quaternion.identity;
     }
 
     private void VibreateTelephone()

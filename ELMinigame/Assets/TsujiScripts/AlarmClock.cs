@@ -7,11 +7,13 @@ public class AlarmClock : MonoBehaviour
     [SerializeField] private float interval;        //振動している時間
     [SerializeField] private float RandomValue;
     [SerializeField] private GameObject clockObj;
-    
+
+    [SerializeField] private float deltaTime;
     private bool  isBell;
     // Start is called before the first frame update
     void Start()
     {
+        deltaTime = 0.0f;
         isBell = false;
         if (interval <= 0.0f)
         {
@@ -21,10 +23,29 @@ public class AlarmClock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (isBell)
-        //{
+        deltaTime += Time.deltaTime;
+        if(deltaTime >= interval)
+        {
+            deltaTime = 0.0f;
+            if (isBell)
+            {
+                InitAlarmClock();
+                isBell = false;
+            }
+            else
+            {
+                isBell = true;
+            }
+        }
+        if (isBell)
+        {
             VibreateAlarmClock();
-        //}
+        }
+    }
+
+    private void InitAlarmClock()
+    {
+        clockObj.GetComponent<Transform>().localRotation = Quaternion.identity;
     }
 
     private void VibreateAlarmClock()
