@@ -11,6 +11,9 @@ public class AirCon : MonoBehaviour
 
     [SerializeField] private int AbsVal;             //絶対値
     [SerializeField] private float deltaTime;
+
+    private GameObject scriptObj;
+    private WakingGauge wakingGauge;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,9 @@ public class AirCon : MonoBehaviour
         }
         AbsVal = Mathf.Abs(setupTemp - roomTemp);
         variableVal = basicSpeed / AbsVal;
+
+        scriptObj = GameObject.Find("WakingGauge");
+        wakingGauge = scriptObj.GetComponent<WakingGauge>();
     }
 
     // Update is called once per frame
@@ -31,6 +37,7 @@ public class AirCon : MonoBehaviour
         {
             deltaTime = 0.0f;
             TempChange();
+            wakingGauge.SetGauge(0.01f);    
         }
     }
 

@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AlarmClock : MonoBehaviour
+public class Telephone : MonoBehaviour
 {
     [SerializeField] private float interval;        //振動している時間
     [SerializeField] private float RandomValue;
-    [SerializeField] private GameObject clockObj;
+    [SerializeField] private GameObject telephoneObj;
 
     [SerializeField] private float deltaTime;
-    private bool  isBell;
+    private bool isBell;
+
+    private GameObject scriptObj;
+    private WakingGauge wakingGauge;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,17 +23,19 @@ public class AlarmClock : MonoBehaviour
         {
             interval = 2.5f;
         }
+        scriptObj = GameObject.Find("WakingGauge");
+        wakingGauge = scriptObj.GetComponent<WakingGauge>();
     }
     // Update is called once per frame
     void Update()
     {
         deltaTime += Time.deltaTime;
-        if(deltaTime >= interval)
+        if (deltaTime >= interval)
         {
             deltaTime = 0.0f;
             if (isBell)
             {
-                InitAlarmClock();
+                InitTelephone();
                 isBell = false;
             }
             else
@@ -39,21 +45,22 @@ public class AlarmClock : MonoBehaviour
         }
         if (isBell)
         {
-            VibreateAlarmClock();
+            VibreateTelephone();
+            wakingGauge.SetGauge(0.1f);   //起床ゲージ上昇
         }
     }
 
-    private void InitAlarmClock()
+    private void InitTelephone()
     {
-        clockObj.GetComponent<Transform>().localRotation = Quaternion.identity;
+        telephoneObj.GetComponent<Transform>().localRotation = Quaternion.identity;
     }
 
-    private void VibreateAlarmClock()
+    private void VibreateTelephone()
     {
-        float val1 = Random.Range(-RandomValue, RandomValue);
-        Quaternion quaternion = clockObj.GetComponent<Transform>().localRotation;
+        float val1 = Random.Range(-RandomValue , RandomValue);
+        Quaternion quaternion = telephoneObj.GetComponent<Transform>().localRotation;
         quaternion.z = val1;
-        clockObj.GetComponent<Transform>().localRotation = quaternion;
+        telephoneObj.GetComponent<Transform>().localRotation = quaternion;
     }
 
     public bool GetBellFlag()
