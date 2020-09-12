@@ -6,7 +6,6 @@ public class Telephone : MonoBehaviour
 {
     [SerializeField] private float interval;        //振動している時間
     [SerializeField] private float RandomValue;
-    [SerializeField] private GameObject telephoneObj;
 
     [SerializeField] private float deltaTime;
     private bool isBell;
@@ -52,15 +51,15 @@ public class Telephone : MonoBehaviour
 
     private void InitTelephone()
     {
-        telephoneObj.GetComponent<Transform>().localRotation = Quaternion.identity;
+        GetComponent<Transform>().localRotation = Quaternion.identity;
     }
 
     private void VibreateTelephone()
     {
         float val1 = Random.Range(-RandomValue , RandomValue);
-        Quaternion quaternion = telephoneObj.GetComponent<Transform>().localRotation;
+        Quaternion quaternion = GetComponent<Transform>().localRotation;
         quaternion.z = val1;
-        telephoneObj.GetComponent<Transform>().localRotation = quaternion;
+        GetComponent<Transform>().localRotation = quaternion;
     }
 
     public bool GetBellFlag()
