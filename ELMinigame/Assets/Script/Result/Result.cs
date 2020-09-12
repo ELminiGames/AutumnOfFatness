@@ -23,5 +23,17 @@ public class Result : MonoBehaviour
         GameObject ResultTime = gameObject.transform.GetChild(1).gameObject;
         ResultTime.GetComponent<Text>().text = EndTime;
         gameObject.GetComponent<AudioSource>().PlayOneShot(SE);
+        StopCorutine();
+    }
+
+    void StopCorutine()
+    {
+        for(int i = 0; i < 10000000;i++)
+        {
+            if (Input.GetKey(KeyCode.Return))
+            {
+                break;
+            }
+        }
     }
 }
