@@ -52,6 +52,11 @@ public class Telephone : MonoBehaviour
             VibreateTelephone();
             wakingGauge.SetGauge(wakingUpVal);   //起床ゲージ上昇
         }
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            isBell = false;
+            InitTelephone();
+        }
     }
 
     private void InitTelephone()
