@@ -14,7 +14,9 @@ public class AlarmClock : MonoBehaviour
     private AudioSource audio;
     private bool  isBell;
     private GameObject scriptObj;
+    private GameObject serialObj;
     private WakingGauge wakingGauge;
+    private SerialHandler serial;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,9 @@ public class AlarmClock : MonoBehaviour
             interval = 2.5f;
         }
         scriptObj = GameObject.Find("WakingGauge");
+        serialObj = GameObject.Find("IOData");
         wakingGauge = scriptObj.GetComponent<WakingGauge>();
+        serial = serialObj.GetComponent<SerialHandler>();
 
         audio = GetComponent<AudioSource>();
     }
@@ -51,6 +55,13 @@ public class AlarmClock : MonoBehaviour
         {
             VibreateAlarmClock();
             wakingGauge.SetGauge(wakingUpVal);   //起床ゲージ上昇
+        }
+
+        if (serial.GetStopAlarm())
+        {
+            isBell = false;
+            InitAlarmClock();
+            serial.SetStopAlarm(false);
         }
     }
 

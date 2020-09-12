@@ -28,8 +28,11 @@ public class WakingGauge : MonoBehaviour
     [SerializeField]private float wakingGauge;       //ゲージの変動値
     private float deltaTime;
 
-    private Result script;
+    private Result resultScript;
+    private SerialHandler serial;
     private GameObject resultObj;
+    private GameObject serialObj;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +40,9 @@ public class WakingGauge : MonoBehaviour
         deltaTime = 0.0f;
 
         resultObj = GameObject.Find("Result");
-        script = resultObj.GetComponent<Result>();
+        serialObj = GameObject.Find("IOData");
+        resultScript = resultObj.GetComponent<Result>();
+        serial = serialObj.GetComponent<SerialHandler>();
     }
 
     // Update is called once per frame
@@ -66,7 +71,7 @@ public class WakingGauge : MonoBehaviour
             {
                 //起床
                 outputVal = 3;
-                script.ShowResult(time1.text+time2.text+time3.text);
+                resultScript.ShowResult(time1.text+time2.text+time3.text);
             }
             if(wakingGauge > 0)
             {
@@ -74,6 +79,7 @@ public class WakingGauge : MonoBehaviour
                 wakingGauge -= wakingSub;
             }
         }
+        serial.SetWakingLevel(outputVal);
     }
 
     public void SetGauge(float val)
