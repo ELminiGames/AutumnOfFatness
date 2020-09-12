@@ -17,6 +17,7 @@ public class WakingGauge : MonoBehaviour
     [SerializeField] private int lv3max;            //最大値
 
     [SerializeField] private float variableVal;
+    [SerializeField] private int wakingSub;
 
     private bool isRestful;            
     private bool isOrdinary;
@@ -72,7 +73,7 @@ public class WakingGauge : MonoBehaviour
             if(wakingGauge > 0)
             {
                 Debug.Log("減少");
-                wakingGauge -=100;
+                wakingGauge -= wakingSub;
             }
         }
     }
