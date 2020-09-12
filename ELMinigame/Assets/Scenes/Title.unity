@@ -565,6 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904e56360e264f84aa3cf2a1e384bcad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoadGameMainName: Game
   speed: 2.5
   EndFade: 0
 --- !u!114 &1113052671
