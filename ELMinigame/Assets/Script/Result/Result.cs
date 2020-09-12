@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Result : MonoBehaviour
 {
     [SerializeField] private AudioClip SE;
+    [SerializeField] private List<GameObject> FalseObj = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -14,6 +15,10 @@ public class Result : MonoBehaviour
     }
 
     public void ShowResult(string EndTime) {
+        foreach(GameObject obj in FalseObj) {
+            obj.SetActive(false);
+        }
+
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
         GameObject ResultTime = gameObject.transform.GetChild(1).gameObject;
         ResultTime.GetComponent<Text>().text = EndTime;
