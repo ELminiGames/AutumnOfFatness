@@ -18,7 +18,7 @@ public class TitleManager : MonoBehaviour
     void Update()
     {
         if (Fade.EndFade) {
-            //SceneManager.LoadScene(LoadGameMainName);
+            SceneManager.LoadScene(LoadGameMainName);
         }
     }
 
