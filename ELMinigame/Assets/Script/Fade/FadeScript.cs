@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FadeScript : MonoBehaviour
 {
@@ -11,16 +12,19 @@ public class FadeScript : MonoBehaviour
     private bool fadeOut = false;
     public bool EndFade = false;
 
+    private void Awake() {
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start() {
         rc = GetComponent<RectTransform>();
-        DontDestroyOnLoad(gameObject);
     }
 
     void Update() {
         if (fadeIn || fadeOut) {
             if (fadeIn) {
                 rc.sizeDelta = new Vector2(rc.sizeDelta.x + speed * 16.0f, rc.sizeDelta.y + speed * 9.0f);
-                if(rc.sizeDelta.x >= 1600.0f) {
+                if(rc.sizeDelta.x >= 2400.0f) {
                     fadeIn = false;
                     EndFade = true;
                 }
