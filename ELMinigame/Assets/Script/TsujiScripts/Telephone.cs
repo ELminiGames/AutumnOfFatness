@@ -6,13 +6,15 @@ public class Telephone : MonoBehaviour
 {
     [SerializeField] private float interval;        //振動している時間
     [SerializeField] private float RandomValue;
+    [SerializeField] private float wakingUpVal;
 
     [SerializeField] private float deltaTime;
-    private bool isBell;
+    [SerializeField] private AudioClip SE03;
 
+    private AudioSource audio;
     private GameObject scriptObj;
     private WakingGauge wakingGauge;
-
+    private bool isBell;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,8 @@ public class Telephone : MonoBehaviour
         }
         scriptObj = GameObject.Find("WakingGauge");
         wakingGauge = scriptObj.GetComponent<WakingGauge>();
+
+        audio = GetComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()
@@ -40,18 +44,20 @@ public class Telephone : MonoBehaviour
             else
             {
                 isBell = true;
+                audio.PlayOneShot(SE03);
             }
         }
         if (isBell)
         {
             VibreateTelephone();
-            wakingGauge.SetGauge(0.1f);   //起床ゲージ上昇
+            wakingGauge.SetGauge(wakingUpVal);   //起床ゲージ上昇
         }
     }
 
     private void InitTelephone()
     {
         GetComponent<Transform>().localRotation = Quaternion.identity;
+        audio.Stop();
     }
 
     private void VibreateTelephone()

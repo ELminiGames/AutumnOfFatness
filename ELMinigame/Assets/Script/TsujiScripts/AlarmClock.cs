@@ -6,10 +6,13 @@ public class AlarmClock : MonoBehaviour
 {
     [SerializeField] private float interval;        //振動している時間
     [SerializeField] private float RandomValue;
+    [SerializeField] private float wakingUpVal;
 
     [SerializeField] private float deltaTime;
-    private bool  isBell;
+    [SerializeField] private AudioClip SE02;
 
+    private AudioSource audio;
+    private bool  isBell;
     private GameObject scriptObj;
     private WakingGauge wakingGauge;
     // Start is called before the first frame update
@@ -23,6 +26,8 @@ public class AlarmClock : MonoBehaviour
         }
         scriptObj = GameObject.Find("WakingGauge");
         wakingGauge = scriptObj.GetComponent<WakingGauge>();
+
+        audio = GetComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()
@@ -38,19 +43,21 @@ public class AlarmClock : MonoBehaviour
             }
             else
             {
+                audio.PlayOneShot(SE02);
                 isBell = true;
             }
         }
         if (isBell)
         {
             VibreateAlarmClock();
-            wakingGauge.SetGauge(0.1f);   //起床ゲージ上昇
+            wakingGauge.SetGauge(wakingUpVal);   //起床ゲージ上昇
         }
     }
 
     private void InitAlarmClock()
     {
         GetComponent<Transform>().localRotation = Quaternion.identity;
+        audio.Stop();
     }
 
     private void VibreateAlarmClock()
