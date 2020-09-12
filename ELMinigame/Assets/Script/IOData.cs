@@ -7,11 +7,10 @@ public class IOData : MonoBehaviour
 {
     private Cdio _cdio;
     private short _id;
-    private int res;
+    private int res = -1;
     private bool StopAlarm = false;
     private byte WakingLevel;
 
-    [SerializeField] private GameObject[] _obj;
     [SerializeField] private string SrialName = "DIO000";
 
     void Start() {
@@ -59,6 +58,6 @@ public class IOData : MonoBehaviour
     }
 
     private void OnDestroy() {
-        _cdio.Exit(_id);
+        //_cdio.Exit(_id);
     }
 }
