@@ -1147,12 +1147,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5994365691719800410, guid: c52e08c162ed32f45bbe1da2730a4a1b, type: 3}
       propertyPath: interval
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5994365691719800410, guid: c52e08c162ed32f45bbe1da2730a4a1b, type: 3}
       propertyPath: telephoneObj
       value: 
       objectReference: {fileID: 2002348044}
+    - target: {fileID: 5994365691719800410, guid: c52e08c162ed32f45bbe1da2730a4a1b, type: 3}
+      propertyPath: SE03
+      value: 
+      objectReference: {fileID: 8300000, guid: 7250e023cd3386142af0ad053b725ba1, type: 3}
+    - target: {fileID: 5994365691719800410, guid: c52e08c162ed32f45bbe1da2730a4a1b, type: 3}
+      propertyPath: RandomValue
+      value: 0.08
+      objectReference: {fileID: 0}
     - target: {fileID: 5994365691719800411, guid: c52e08c162ed32f45bbe1da2730a4a1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -1671,12 +1679,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 325415210384690256, guid: e312510a93b1d9e4da3a7fad5bddacb7, type: 3}
       propertyPath: interval
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 325415210384690256, guid: e312510a93b1d9e4da3a7fad5bddacb7, type: 3}
       propertyPath: clockObj
       value: 
       objectReference: {fileID: 90155946}
+    - target: {fileID: 325415210384690256, guid: e312510a93b1d9e4da3a7fad5bddacb7, type: 3}
+      propertyPath: SE02
+      value: 
+      objectReference: {fileID: 8300000, guid: 049cc20e5110335489cbc63d1a805cbd, type: 3}
     - target: {fileID: 325415210384690257, guid: e312510a93b1d9e4da3a7fad5bddacb7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5
