@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WakingGauge : MonoBehaviour
 {
@@ -17,22 +18,26 @@ public class WakingGauge : MonoBehaviour
     [SerializeField] private int lv3max;            //最大値
 
     [SerializeField] private float variableVal;
-    [SerializeField] private int wakingSub;
+    [SerializeField] private int   wakingSub;
+    [SerializeField] private Text  time1;
+    [SerializeField] private Text  time2;
+    [SerializeField] private Text  time3;
 
-    private bool isRestful;            
-    private bool isOrdinary;
-    private bool isShallow;
+    private int outputVal;
 
     [SerializeField]private float wakingGauge;       //ゲージの変動値
     private float deltaTime;
+
+    private Result script;
+    private GameObject resultObj;
     // Start is called before the first frame update
     void Start()
     {
-        isRestful = false;
-        isOrdinary = false;
-        isShallow = false;
         wakingGauge = 0;
         deltaTime = 0.0f;
+
+        resultObj = GameObject.Find("Result");
+        script = resultObj.GetComponent<Result>();
     }
 
     // Update is called once per frame
@@ -45,30 +50,23 @@ public class WakingGauge : MonoBehaviour
             if (wakingGauge > lv1min && wakingGauge < lv1max)
             {
                 //安眠
-                isRestful = true;
-                isOrdinary = false;
-                isShallow = false;
+                outputVal = 0;
             }
             else if (wakingGauge > lv2min && wakingGauge < lv2max)
             {   
                 //普通
-                isRestful = false;
-                isOrdinary = true;
-                isShallow = false;
+                outputVal = 1; 
             }
             else if (wakingGauge > lv3min && wakingGauge < lv3max)
             {   
                 //苦眠
-                isRestful = false;
-                isOrdinary = false;
-                isShallow = true;
+                outputVal = 2;
             }
             else
             {
                 //起床
-                isRestful = false;
-                isOrdinary = false;
-                isShallow = false;
+                outputVal = 3;
+                script.ShowResult(time1.text+time2.text+time3.text);
             }
             if(wakingGauge > 0)
             {
@@ -81,5 +79,10 @@ public class WakingGauge : MonoBehaviour
     public void SetGauge(float val)
     {
         wakingGauge += val;
+    }
+
+    public int OutputWaikngVal()
+    {
+        return outputVal;
     }
 }
