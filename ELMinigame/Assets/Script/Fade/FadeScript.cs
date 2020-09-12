@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class FadeScript : MonoBehaviour
 {
     private RectTransform rc;
+    [SerializeField] private string LoadGameMainName;
     [SerializeField] private float speed = 0.01f;
     private bool fadeIn = false;
     private bool fadeOut = false;
@@ -23,7 +24,9 @@ public class FadeScript : MonoBehaviour
     void Update() {
         if (fadeIn || fadeOut) {
             if (fadeIn) {
-                rc.sizeDelta = new Vector2(rc.sizeDelta.x + speed * 16.0f, rc.sizeDelta.y + speed * 9.0f);
+                SceneManager.LoadScene(LoadGameMainName);
+
+                //rc.sizeDelta = new Vector2(rc.sizeDelta.x + speed * 16.0f, rc.sizeDelta.y + speed * 9.0f);
                 if(rc.sizeDelta.x >= 2400.0f) {
                     fadeIn = false;
                     EndFade = true;
