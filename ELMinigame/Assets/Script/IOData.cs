@@ -7,17 +7,18 @@ public class IOData : MonoBehaviour
 {
     private Cdio _cdio;
     private short _id;
-    int res;
-    public bool StopAlarm = false;
-    public byte WakingLevel;
+    private int res;
+    private bool StopAlarm = false;
+    private byte WakingLevel;
 
     [SerializeField] private GameObject[] _obj;
+    [SerializeField] private string SrialName = "DIO000";
 
     void Start() {
         _cdio = new Cdio();
 
         //                      シリアル名
-        res = _cdio.Init("DIO000", out _id);
+        res = _cdio.Init(SrialName, out _id);
     }
 
     void Update() {
@@ -28,9 +29,18 @@ public class IOData : MonoBehaviour
 
     public void SetWakingLevel(int val) {
         WakingLevel = (byte)val;
-        OutputData();
+        if (res == (int)CdioConst.DIO_ERR_SUCCESS) {
+            OutputData();
+        }
     }
 
+    public bool GetStopAlarm() {
+        return StopAlarm;
+    }
+
+    public void SetStopAlarm(bool val) {
+        StopAlarm = val;
+    }
 
     private void InputData() {
         var data = new byte[1];
