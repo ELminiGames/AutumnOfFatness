@@ -13,7 +13,8 @@ public class TimeCount : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        time.text = "0" + initTime.ToString();
+        if (initTime < 10) time.text = "0" + initTime.ToString();
+        else time.text = initTime.ToString();
     }
 
     // Update is called once per frame
@@ -21,6 +22,22 @@ public class TimeCount : MonoBehaviour
     {
         deltaTime += Time.deltaTime;
         int val = (int)deltaTime;
-        mini.text = val.ToString();
+        if (val < 10) mini.text = "0" + val.ToString();
+        else mini.text = val.ToString();
+        if (val >= 60)
+        {
+            deltaTime = 0.0f;
+            mini.text = "00";
+            initTime++;
+            if (val < 10) time.text = "0" + initTime.ToString();
+            else time.text = val.ToString();
+
+            if (initTime < 24) time.text = initTime.ToString();
+            else
+            {
+                initTime = 0;
+                time.text = "0" + initTime;
+            }
+        }
     }
 }
